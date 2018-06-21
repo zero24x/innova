@@ -1,0 +1,15 @@
+How to build for Mac 10.8 64bit and higher:
+
+Install SDK and all needed libraries like this:
+
+* Get MacOSX10.8.sdk - https://github.com/phracker/MacOSX-SDKs/releases
+
+* sudo port -d install libevent configure.cxxflags="-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk" configure.cflags="-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk" configure.ldflags="-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
+
+Configure wallet:
+
+* ./configure --disable-tests OSX_SDK=10.8 LDFLAGS="$LDFLAGS -I/opt/local/inclopt/local/include/db48 -stdlib=libc++" CPPFLAGS="$CPPFLAGS -mmacosx-version-min=10.8 -stdlib=libc++ -I/opt/local/include -I/opt/local/include/db48 -I/opt/local/libexec/qt5/include" LIBS="$LIBS -L/opt/local/lib/db48 -L/opt/local/lib -L/opt/local/libexec/qt5/lib"
+
+Compile as usual:
+
+* make deploy 
